@@ -31,7 +31,7 @@ public class Main {
                     break;
 
                 case 4:
-                    searchProduct(shoppingList);
+                    searchMatches(shoppingList);
                     break;
 
                 default:
@@ -44,12 +44,12 @@ public class Main {
     }
 
     /**
-     * Метод поиска товара в списке покупок по маске.
+     * Метод поиска товаров в списке покупок по маске введенной пользователем.
      *
      * @param shoppingList - список покупок
      */
-    public static void searchProduct(List<String> shoppingList) {
-        boolean notFound=true;
+    public static void searchMatches(List<String> shoppingList) {
+        boolean notFound = true;
 
         if (shoppingList.isEmpty()) {
             System.out.println("Список покупок пуст.");
@@ -61,11 +61,11 @@ public class Main {
                 String stringCheck = shoppingList.get(i).toLowerCase();
 
                 if (stringCheck.contains(stringMatch)) {
-                    notFound=false;
+                    notFound = false;
                     System.out.println((i + 1) + ". " + shoppingList.get(i));
                 }
             }
-            if (notFound){
+            if (notFound) {
                 System.out.println("Совпадений не найдено!");
             }
         }
