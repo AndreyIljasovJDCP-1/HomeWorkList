@@ -116,8 +116,13 @@ public class Main {
     public static void addBuy(List<String> shoppingList) {
         System.out.println("Какую покупку хотите добавить?");
         String addBuy = scanner.nextLine();
-        shoppingList.add(addBuy);
-        System.out.println("Итого в списке покупок: " + shoppingList.size());
+
+        if (shoppingList.contains(addBuy)) {
+            System.out.println("Товар->" + addBuy + " уже есть в списке покупок!");
+        } else {
+            shoppingList.add(addBuy);
+            System.out.println("Итого в списке покупок: " + shoppingList.size());
+        }
     }
 
     /**
