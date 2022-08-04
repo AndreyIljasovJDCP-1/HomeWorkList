@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
  * Класс формирования списка покупок.
- * Позволяет добавлять, просматривать и/или удалять покупки из списка.
+ * Позволяет добавлять, просматривать и/или удалять покупки из списка,
+ * а также искать товар по маске в списке.
  */
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -28,6 +30,10 @@ public class Main {
                     deleteBuy(shoppingList);
                     break;
 
+                case 4:
+                    searchProduct(shoppingList);
+                    break;
+
                 default:
                     System.out.println("Программа завершена!");
                     return;
@@ -35,6 +41,28 @@ public class Main {
 
         }
 
+    }
+
+    /**
+     * Метод поиска товара в списке покупок по маске.
+     *
+     * @param shoppingList - список покупок
+     */
+    public static void searchProduct(List<String> shoppingList) {
+
+        if (shoppingList.isEmpty()) {
+            System.out.println("Список покупок пуст.");
+        } else {
+            System.out.println("Введите текст для поиска:");
+            String stringMatch = scanner.nextLine().toLowerCase(Locale.ROOT);
+            for (int i = 0; i < shoppingList.size(); i++) {
+                String stringCheck = shoppingList.get(i).toLowerCase();
+
+                if (stringCheck.contains(stringMatch)) {
+                    System.out.println((i + 1) + ". " + shoppingList.get(i));
+                }
+            }
+        }
     }
 
     /**
@@ -105,25 +133,26 @@ public class Main {
 
     /**
      * Метод вывода основного меню.
-     * Дает возможность выбрать пользователю код операции от 1 до 4.
+     * Дает возможность выбрать пользователю код операции от 1 до 5.
      *
-     * @return int число 1-4, в зависимости от выбора пользователя
+     * @return int число 1-5, в зависимости от выбора пользователя
      */
     public static int showMenu() {
         int output;
 
         do {
-            System.out.println("\nВведите код операции (1-4):");
+            System.out.println("\nВведите код операции (1-5):");
             System.out.println("1. Добавить.");
             System.out.println("2. Показать.");
             System.out.println("3. Удалить.");
-            System.out.println("4. Выход.");
+            System.out.println("4. Поиск.");
+            System.out.println("5. Выход.");
 
             String input = scanner.nextLine();
             input = input.replaceAll(" ", "");
 
             if (input.length() != 1) {
-                System.out.println("Некорректные данные. Введите 1, 2, 3 или 4.");
+                System.out.println("Некорректные данные. Введите 1, 2, 3, 4 или 5.");
                 output = 0;
                 continue;
             }
@@ -131,16 +160,16 @@ public class Main {
             try {
                 output = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("Некорректные данные. Введите 1, 2, 3 или 4.");
+                System.out.println("Некорректные данные. Введите 1, 2, 3, 4 или 5.");
                 output = 0;
                 continue;
             }
 
-            if (output > 4 || output < 1) {
-                System.out.println("Некорректные данные. Введите 1, 2, 3 или 4.");
+            if (output > 5 || output < 1) {
+                System.out.println("Некорректные данные. Введите 1, 2, 3, 4 или 5.");
             }
 
-        } while (output != 1 && output != 2 && output != 3 && output != 4);
+        } while (output != 1 && output != 2 && output != 3 && output != 4 && output != 5);
         return output;
     }
 }
