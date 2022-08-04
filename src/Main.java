@@ -49,18 +49,24 @@ public class Main {
      * @param shoppingList - список покупок
      */
     public static void searchProduct(List<String> shoppingList) {
+        boolean notFound=true;
 
         if (shoppingList.isEmpty()) {
             System.out.println("Список покупок пуст.");
         } else {
             System.out.println("Введите текст для поиска:");
             String stringMatch = scanner.nextLine().toLowerCase(Locale.ROOT);
+            System.out.println("Результат поиска:");
             for (int i = 0; i < shoppingList.size(); i++) {
                 String stringCheck = shoppingList.get(i).toLowerCase();
 
                 if (stringCheck.contains(stringMatch)) {
+                    notFound=false;
                     System.out.println((i + 1) + ". " + shoppingList.get(i));
                 }
+            }
+            if (notFound){
+                System.out.println("Совпадений не найдено!");
             }
         }
     }
